@@ -25,3 +25,6 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# OAuth token helper (contains client secret)
+scripts/get-google-token.mjs

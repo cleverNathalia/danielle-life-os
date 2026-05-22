@@ -4,6 +4,7 @@ export interface TogglWeeklyData {
   isRunning: boolean
   currentDesc: string
   dailyBreakdown: DailyEntry[]
+  dailyHours: DailyHours[]
 }
 
 export interface DailyHours {
