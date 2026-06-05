@@ -91,9 +91,11 @@ function formatTime(isoString: string): string {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const reqOrigin = req.headers.get('Origin') ?? ''
-    const allowedOrigin = /^https?:\/\/localhost(:\d+)?$/.test(reqOrigin)
-      ? reqOrigin
-      : env.ALLOWED_ORIGIN
+    const isAllowedOrigin =
+      /^https?:\/\/localhost(:\d+)?$/.test(reqOrigin) ||
+      /^https:\/\/(.*\.)?claude\.ai$/.test(reqOrigin) ||
+      reqOrigin === env.ALLOWED_ORIGIN
+    const allowedOrigin = isAllowedOrigin ? reqOrigin : env.ALLOWED_ORIGIN
     const corsHeaders = {
       'Access-Control-Allow-Origin': allowedOrigin,
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
